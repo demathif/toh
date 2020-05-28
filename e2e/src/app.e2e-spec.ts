@@ -36,7 +36,7 @@ class Hero {
     }
 }
 
-describe('Tutorial part 3', () => {
+describe('Tutorial part 4', () => {
   beforeAll(() => browser.get(''));
   describe('Initial page', initialPageTests);
   describe('Select hero', selectHeroTests);
@@ -83,9 +83,13 @@ function selectHeroTests() {
 
   it('shows selected hero details', async () => {
     let page = getPageElts();
+    let message = getMessage();
     let hero = await Hero.fromDetail(page.heroDetail);
     expect(hero.id).toEqual(targetHero.id);
     expect(hero.name).toEqual(targetHero.name.toUpperCase());
+    // Message text contain id number matches the hero.id number
+    expect(message.getText()).toContain(hero.id);
+
   });
 }
 
@@ -130,4 +134,10 @@ function getPageElts() {
     selected: element(by.css('app-root li.selected')),
     heroDetail: element(by.css('app-root > div, app-root > app-heroes > app-hero-detail > div'))
   };
+}
+
+function getMessage() {
+  let hero = element(by.cssContainingText('li span.badge', targetHero.id.toString()));
+  hero.click();
+  return element.all(by.css('app-root > app-messages > div > div')).get(1);
 }
