@@ -36,7 +36,7 @@ class Hero {
     }
 }
 
-describe('Tutorial part 2', () => {
+describe('Tutorial part 3', () => {
   beforeAll(() => browser.get(''));
   describe('Initial page', initialPageTests);
   describe('Select hero', selectHeroTests);
@@ -128,6 +128,6 @@ function getPageElts() {
   return {
     heroes: element.all(by.css('app-root li')),
     selected: element(by.css('app-root li.selected')),
-    heroDetail: element(by.css('app-root > div, app-root > app-heroes > div'))
+    heroDetail: element(by.css('app-root > div, app-root > app-heroes > app-hero-detail > div'))
   };
 }
